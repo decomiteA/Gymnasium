@@ -1,0 +1,43 @@
+import numpy as np 
+from gymnasium import utils
+from gymnasium.envs.mujoco import MuJocoPyEnv
+from gymnasium.spaces import Box
+
+class WalkerLang1Env(MuJocoPyEnv, utils.EzPickle):
+  metadata = {
+      "render_modes': [
+          "human",
+          "rgb_array",
+          "depth_array",
+      ],
+      "render_fps":125,
+  }
+  
+  def __init__(self, **kwargs):
+    observation_space = Box(low=-np.inf, high=np.inf, shape=(11,), dtype=np.float64)
+    MuJocoPyEnv.__init__(
+      self, "walker_lang1.xml", 4, observation_space=observation_space, **kwargs
+    )
+    utils.EzPickle.__init__(self, **kwargs)
+    
+  def step(self, a):
+    posbefore = self.sim.data.qpos[0]
+    self.do_simulation(a, self.frame_skip)
+    posafter, height, ang = self.sim.data.qpos[0:3]
+    
+    alive_bonus = 1.0
+    reward = (posafter - posbefore) / self.dt
+    reward += alive_bonus
+    reward -= 1e-3 * np.square(a).sum()
+    s = self.state_vector()
+    terminated = not(
+      np.isfinite(s).all()
+      and (np.abs(s[2:])<100).all()
+      and (height > 0.7)
+      and (abs(ang) < 0.2)
+    )
+    ob = self._get_obs()
+    
+    if self.render_mode =="human":
+      self.render()
+    return ob, reward, terminated, False, {}
