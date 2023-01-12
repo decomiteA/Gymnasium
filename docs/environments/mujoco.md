@@ -19,6 +19,7 @@ mujoco/reacher
 mujoco/swimmer
 mujoco/pusher
 mujoco/walker2d
+mujoco/walker_lang1
 ```
 
 ```{raw} html
