@@ -34,4 +34,4 @@ def get_description():
     return long_description
 
 
-setup(name="gymnasium", version=get_version(), long_description=get_description())
+setup(name="gymnasium_lang", version=get_version(), long_description=get_description())
