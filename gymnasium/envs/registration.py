@@ -369,7 +369,7 @@ def make(id: Literal[
     "Hopper-v2", "Hopper-v3", "Hopper-v4",
     "Swimmer-v2", "Swimmer-v3", "Swimmer-v4",
     "Walker2d-v2", "Walker2d-v3", "Walker2d-v4",
-    "Ant-v2", "Ant-v3", "Ant-v4",
+    "Ant-v2", "Ant-v3", "Ant-v4","WalkerLang1",
     "HumanoidStandup-v2", "HumanoidStandup-v4",
     "Humanoid-v2", "Humanoid-v3", "Humanoid-v4",
 ], **kwargs) -> Env[np.ndarray, np.ndarray]: ...
