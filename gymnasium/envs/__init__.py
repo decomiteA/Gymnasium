@@ -297,6 +297,11 @@ register(
 )
 
 register(
+    id="WalkerLang1",
+    max_episode_steps=1000,
+    entry_point="gymnasium.envs.mujoco.walker_lang1:WalkerLang1Env",
+)
+register(
     id="Ant-v2",
     entry_point="gymnasium.envs.mujoco:AntEnv",
     max_episode_steps=1000,
